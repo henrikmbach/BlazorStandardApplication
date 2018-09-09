@@ -1,0 +1,44 @@
+﻿<p>Jeg har brugt <a href="https://www.codemag.com/Article/1809061/Re-Assembling-the-Web-with-Web-Assembly-and-Blazor">https://www.codemag.com/Article/1809061/Re-Assembling-the-Web-with-Web-Assembly-and-Blazor</a>
+(Rick Strahls artikel i Visual Studio Magazine) til at komme igang med Blazor.
+Jeg har ogs� kigget p� <a href="https://blogs.msdn.microsoft.com/webdev/2018/03/22/get-started-building-net-web-apps-in-the-browser-with-blazor/">https://blogs.msdn.microsoft.com/webdev/2018/03/22/get-started-building-net-web-apps-in-the-browser-with-blazor/</a>
+(msdn-blog, en komme-i-gang med Blazor artikel)</p>
+<p><strong>Her er hvad jeg lavede fredag 7/9-2018:</strong></p>
+<p>Man skal installere nogle prerequisites for at det virker:</p>
+<ul>
+<li>Visual Studio 2017 update 7 eller senere (jeg har pt. 2017 Community update 8, 3. udgave (fuld version 15.8.3))
+<ul>
+<li>.Net Core Blazor Language Extension (tror jeg nok) - en extension til Visual Studio, der er i &quot;Tools&quot;, &quot;Extension and Updates&quot; menuen</li>
+</ul>
+</li>
+</ul>
+<p>S� har jeg i Visual Studio lavet et nyt projekt &quot;Asp.Net Core Web ...&quot; og s� skal man i wizard'en markere &quot;Blazor&quot;</p>
+<p>S� stod der i msdn-blog artiklen at F5 for at debugge ikke virker i Visual Studio, men at Ctrl-F5 (uden debugning)
+fungerer. Jeg fik en &quot;HTTP Error 502.5 - Process Failure&quot; fejl i Edge browseren n�r jeg pr�vede med Ctrl-F5.
+Jeg pr�vede i Visual Studio at �ndre standard browser til Chrome:
+<img src="V%EF%BF%BDlgStandardBrowserIVisualStudio.PNG" alt="" />
+Jeg fik samme fejl.
+S� pr�vede jeg at klikke p� det shortcut, der var i fejl-beskeden i browseren
+(<a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/troubleshoot?view=aspnetcore-2.1">https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/troubleshoot?view=aspnetcore-2.1</a>)
+Der var ikke rigtig noget der fangede. Der var et punkt i shortcuttet &quot;Application Event Log&quot; og med
+det fandt jeg en fejl &quot;IIS Express AspNetCore Module&quot; fejl med en errorcode 0x80004005.
+Og med et s�gte jeg p� Google efter &quot;blazor error code 0x80004005&quot; og det f�rste hit (<a href="https://github.com/aspnet/Blazor/issues/1342">https://github.com/aspnet/Blazor/issues/1342</a>)
+sagde at man enten skulle slette global.json eller �ndre den til at indeholde ens nuv�rende version af .Net Core.
+I en Visual Studio Command Prompt kan man udf�re &quot;dotnet --info&quot; og med den fik min seneste version til 2.1.401,
+s� jeg �ndrede global.json fra &quot;sdk&quot;: { &quot;version&quot;: &quot;2.1.300&quot; ...
+til &quot;sdk&quot;: { &quot;version&quot;: &quot;2.1.401&quot;
+Og s� virkede det &quot;HURRA!&quot;.</p>
+<p>Og F5 virker ogs�, s� Ctrl-F5 er �benbart ikke n�dvendigt.</p>
+<p><strong>Her er hvad jeg lavede l�rdag 8/9-2018:</strong></p>
+<p>Jeg pr�vede at lave en Markdown fil (.md). Jeg s�gte efter en Markdown add-in til
+Visual Studio og Mads Kristensen har lavet en - og den fungerer fint - den viser
+hvordan markdown filen ser ud ved siden af. Det fungerer fint.
+Et par markdown ting jeg har l�rt:</p>
+<ul>
+<li>![](url) for at vise et billede, url kan bare v�re en lokal sti til filen.</li>
+<li>__ (dobbelt understregning) for at lave en understregning af en tekst</li>
+</ul>
+<p>TODO:</p>
+<ul>
+<li>smid det her i github f.eks. eller VSTS for at gemme koden og versioner</li>
+<li>forts�tte med artiklen</li>
+</ul>
